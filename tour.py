@@ -3,6 +3,8 @@ import selectorlib
 
 URL = "http://programmer100.pythonanywhere.com/tours/"
 
+file_path = "textFile/data.txt"
+
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
@@ -17,10 +19,10 @@ def extract (source):
     return value
 
 def store(extract):
-    with open ("data.txt" , "a") as file:
+    with open (file_path , "a") as file:
         file.write(extract + "\n")
 
 def read(extract):
-    with open ("data.txt" , "r") as file:
+    with open (file_path , "r") as file:
         DATA = file.read()
         return DATA

@@ -4,6 +4,8 @@ import time
 
 time_url = "http://programmer100.pythonanywhere.com/"
 
+file_path = "textFile/time.txt"
+
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
@@ -20,10 +22,10 @@ def time_ex(time_source):
     return time_sou
 
 def store_time(time_ex):
-    with open ("time.txt" , "a") as file:
+    with open (file_path , "a") as file:
         file.write(f"{temp},{time_ex}" + "\n")
 
     
 def time_read (time_ex):
-    with open ("time.txt" , "r") as file:
+    with open (file_path , "r") as file:
         return file.read()
