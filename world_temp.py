@@ -1,6 +1,9 @@
 import requests
 import selectorlib
 import time
+import sqlite3
+
+connection = sqlite3.connect("data.db")
 
 time_url = "http://programmer100.pythonanywhere.com/"
 
@@ -20,12 +23,3 @@ def time_ex(time_source):
     time_ext = selectorlib.Extractor.from_yaml_file("extract.yaml")
     time_sou = time_ext.extract(time_source)["time"]
     return time_sou
-
-def store_time(time_ex):
-    with open (file_path , "a") as file:
-        file.write(f"{temp},{time_ex}" + "\n")
-
-    
-def time_read (time_ex):
-    with open (file_path , "r") as file:
-        return file.read()

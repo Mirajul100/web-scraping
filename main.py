@@ -1,6 +1,11 @@
 from tour import scrap , extract , store , read , URL
-from world_temp import time_scrap , time_read , time_ex , store_time , time_url
+from world_temp import time_scrap , time_ex , time_url
 from send_email import send_mail
+import sqlite3
+
+# Connect the sql database
+connection = sqlite3.connect("data.db")
+cursor = connection.cursor()
 
 if __name__ == "__main__":
     scraps = scrap(URL)
@@ -11,10 +16,9 @@ if __name__ == "__main__":
     t_time = time_ex(time_scraps)
     print (t_time)
 
-    content = read(extracted)
     if extracted != "No upcoming tours":
-        if extracted not in content:
-            store_time(time_ex=t_time)
+        rows = read(extracted )
+        if not rows :
             store(extract=extracted)
             massage = f"""\
             Tour planner:
