@@ -14,12 +14,13 @@ HEADERS = {
 
 temp = time.strftime("%Y.%m.%d")
 
-def time_scrap(time_url):
-    time_response = requests.get(time_url , headers=HEADERS)
-    time_source = time_response.text
-    return time_source
+class Temperature:
+    def time_scrap(self , time_url):
+        time_response = requests.get(time_url , headers=HEADERS)
+        time_source = time_response.text
+        return time_source
 
-def time_ex(time_source):
-    time_ext = selectorlib.Extractor.from_yaml_file("extract.yaml")
-    time_sou = time_ext.extract(time_source)["time"]
-    return time_sou
+    def time_ex(self , time_source):
+        time_ext = selectorlib.Extractor.from_yaml_file("extract.yaml")
+        time_sou = time_ext.extract(time_source)["time"]
+        return time_sou

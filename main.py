@@ -1,5 +1,5 @@
-from tour import scrap , extract , store , read , URL
-from world_temp import time_scrap , time_ex , time_url
+from tour import Event , Store , URL
+from world_temp import Temperature, time_url
 from send_email import send_mail
 import sqlite3
 
@@ -8,18 +8,21 @@ connection = sqlite3.connect("data.db")
 cursor = connection.cursor()
 
 if __name__ == "__main__":
-    scraps = scrap(URL)
-    extracted = extract(scraps)
+    event = Event()
+    scraps = event.scrap(URL)
+    extracted = event.extract(scraps)
     print (extracted)
 
-    time_scraps = time_scrap(time_url)
-    t_time = time_ex(time_scraps)
+    temperature = Temperature()
+    time_scraps = temperature.time_scrap(time_url)
+    t_time = temperature.time_ex(time_scraps)
     print (t_time)
 
     if extracted != "No upcoming tours":
-        rows = read(extracted )
+        stores = Store(database_path="data.db")
+        rows = stores.read(extracted )
         if not rows :
-            store(extract=extracted)
+            stores.store(extract=extracted)
             massage = f"""\
             Tour planner:
 
